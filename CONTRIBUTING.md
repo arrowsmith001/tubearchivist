@@ -162,13 +162,15 @@ TZ=America/New_York
 DJANGO_DEBUG=True
 ```
 
-Than from look at the container startup script `run.sh`, make sure all needed migrations ran, then to start the dev server from the same folder as `manage.py` run:
+Then look at the container startup script `docker_assets/run.sh`, make sure all needed migrations ran, then to start the dev server from the same folder as `manage.py` run:
 
 ```bash
 python manage.py runserver
 ```
 
 You'll probably also want to have a Celery worker instance running, refer to `run.sh` for that. The Beat Scheduler might not be needed.
+
+If you encounter the error: `django.db.utils.OperationalError: unable to open database file`, this can be fixed by creating an empty directory at `backend/static/volume/cache`, or whatever path you decide (the files at the default path are not checked in by Git, understandably, but the absence of the directory itself can cause this error).
 
 ### Docker Instructions
 
